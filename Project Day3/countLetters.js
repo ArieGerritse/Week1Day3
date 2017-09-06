@@ -1,15 +1,15 @@
 function countLetters (arg){
 
   arg = arg.toLowerCase().split(" ").join("");
-  var usedLetters = new Object();
+  var usedLetters = new Object({});
 
   for(var out of arg){
 
     switch(true){
-      case (!usedLetters[out] === false):
+      case ((out in usedLetters) === true):
         usedLetters[out] += 1;
          break;
-      case (!usedLetters[out] === true):
+      case ((out in usedLetters) === false):
         usedLetters[out] = 1;
         break;
     }

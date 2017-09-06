@@ -1,7 +1,7 @@
 function charicterPosition (arg){
 
   arg = arg.toLowerCase();
-  var charPosition = new Object();
+  var charPosition = new Object({});
   var position = 0;
 
   for(var out of arg){
@@ -11,10 +11,10 @@ function charicterPosition (arg){
     switch(true){
       case(out === ' '):
         break;
-      case (!charPosition[out] === false):
+      case ((out in charPosition) === true):
         charPosition[out].push(position);
         break;
-      case (!charPosition[out] === true):
+      case ((out in charPosition) === false):
         charPosition[out] = [position];
         break;
     }

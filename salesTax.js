@@ -4,7 +4,7 @@ function calculateSalesTax (salesData, taxRates){
 
   for(var everything in salesData){
 
-    var output = new Object();
+    var output = new Object({});
     output.name = salesData[i].name + ' ' + salesData[i].province;
     output.totalSales = addSales(salesData[i].sales);
     output.totalTaxes = salesTaxRates[salesData[i].province] * output.totalSales;

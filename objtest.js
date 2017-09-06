@@ -31,3 +31,7 @@ function calculateSalesTax (salesData, taxRates){
   console.log(salesData[name]);
 
 }*/
+
+var array = [1,2,3];
+
+console.log(Math.sum(1,2,3));
