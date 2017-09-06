@@ -2,18 +2,37 @@ function calculateSalesTax (salesData, taxRates){
 
   var i = 0;
 
+  var output = new Object({});
+
+
   for(var everything in salesData){
 
-    var output = new Object({});
-    output.name = salesData[i].name + ' ' + salesData[i].province;
-    output.totalSales = addSales(salesData[i].sales);
-    output.totalTaxes = salesTaxRates[salesData[i].province] * output.totalSales;
+    var company = salesData[i].name;
+    // console.log(company);
 
-    console.log(output);
+    if(company in output){
+
+      output[company].totalSales += addSales(salesData[i].sales);
+      output[company].totalTaxes += addSales(salesData[i].sales) *
+      taxRates[salesData[i].province];
+      // console.log("gere!");
+
+    } else{
+
+      // output = {company};
+      output[company] = {totalSales:'', totalTaxes:''};
+      output[company].totalSales = (addSales(salesData[i].sales));
+      output[company].totalTaxes = (taxRates[salesData[i].province]) *
+      addSales(salesData[i].sales);
+      // console.log(output);
+
+    }
+
     i++;
 
   }
 
+console.log(output);
 
 }
 
