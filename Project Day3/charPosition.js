@@ -12,11 +12,8 @@ function countLetters (arg){
       case(out === ' '):
         break;
       case (!charPosition[out] === false):
-        let arrayDump = [];
-        arrayDump = charPosition[out];
-        arrayDump.push(position);
-        charPosition[out] = arrayDump;
-         break;
+        charPosition[out].push(position);
+        break;
       case (!charPosition[out] === true):
         charPosition[out] = [position];
         break;
