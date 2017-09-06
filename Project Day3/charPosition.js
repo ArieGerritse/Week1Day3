@@ -1,4 +1,4 @@
-function countLetters (arg){
+function charicterPosition (arg){
 
   arg = arg.toLowerCase();
   var charPosition = new Object();
@@ -25,4 +25,4 @@ function countLetters (arg){
 
 }
 
-countLetters('lighthouse in the house');
+charicterPosition('lighthouse in the house');
