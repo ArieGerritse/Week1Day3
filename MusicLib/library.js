@@ -23,7 +23,6 @@ var library = {
              }
 };
 
-var questionForUser = [1, 2, 3];
 
 // FUNCTIONS TO IMPLEMENT:
 
@@ -141,11 +140,61 @@ var addPlaylist = function (name) {
 
 var printSearchResults = function(query) {
 
+  for(let trackID of Object.keys(library.tracks)){
+    var p;
+    var itHappened = 0;
+    var repeates;
 
+    for(var trackInfo of Object.keys(library.tracks[trackID])){
+
+      p = library.tracks[trackID][trackInfo].search(new RegExp(query, "i"));
+
+      if(p > -1){
+
+        if(trackID !== repeates){
+          console.log(library.tracks[trackID]);
+          itHappened++;
+          repeates = trackID;
+        }
+
+      }
+    }
+
+  }
+
+  if(itHappened === 0){
+
+    console.log('Sorry that never came up in the database.');
+  }
 
 };
 
 
-var out = 'p02';
-printPlaylist(out);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -22,53 +22,55 @@ var companySalesData = [
   }
 ];
 
-function calculatetax(companySalesData, salesTaxRates) {
-  companyprofile = {};
-  for ( var i= 0; i < companySalesData.length; i++){
+function sum(input){  //generic sum function for any number
 
-    var totalSales = 0;
-
-    for (var j = 0; j <companySalesData[i]["sales"].length; j++){
-
-      totalSales += companySalesData[i]["sales"][j];
-
+ var total =  0;
+  for(var i=0;i<input.length;i++) {
+    if(isNaN(input[i])){
+     continue;
     }
-
-    console.log(totalSales);
-    var totalTax = totalSales * salesTaxRates[companySalesData[i]["province"]];
-
-    // console.log(totalTax);
-    // console.log(companySalesData[i]["name"])
+    total += Number(input[i]);
+  }
+  return total;
+}
 
 
+function calculateSalesTax(salesData, taxRates) {
 
+  var object = {};
+  for(i in salesData){
 
-    if ( companySalesData[i]["name"] in companyprofile) {
-
-
-      companyprofile[companySalesData[i]["name"]]["totalSales"]+= totalSales;
-
-      console.log(companyprofile[companySalesData[i]["name"]]["totalSales"]);
-      companyprofile[companySalesData[i]["name"]]["totalTaxes"]+=totalTax;
+    var myCompany = salesData[i].name;
+    var mySum = sum(salesData[i].sales);
+    var myTax = sum(salesData[i].sales) * taxRates[salesData[i].province];
+    var myProvince = salesData[i].province;
+    if(object[myCompany]){
+      console.log(object);
+      object[myCompany].salesData += mySum;
+      object[myCompany].salesData += myTax;
+      console.log(object);
     }
-      else {
-        console.log(totalTax);
-        companyprofile[companySalesData[i]["name"]] = {
-
-          "totalSales" : totalSales,
-          "totalTaxes": totalTax
-
-
-
-
-
-
+    else{
+      // console.log('HERE!');
+    object[myCompany] = {totalSales: mySum, totalTaxes: myTax};
     }
 
   }
-
+  return object;
 }
- return companyprofile
 
+
+var results = calculateSalesTax(companySalesData, salesTaxRates);
+console.log(results);
+/* Expected Results:
+{
+  Telus: {
+    totalSales: 1300
+    totalTaxes: 144
+  },
+  Bombardier: {
+    totalSales: 800,
+    totalTaxes: 40
+  }
 }
-console.log(calculatetax(companySalesData, salesTaxRates));
+*/

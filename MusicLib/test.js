@@ -23,128 +23,145 @@ var library = {
              }
 };
 
-var printPlaylists = function (playNum) {
 
-  if(playNum){
+var printSearchResults = function(query) {
 
-     console.log(playNum + ': ' + library.playlists[playNum].name + ' - ' +
-      Object.keys(library.playlists[playNum].tracks).length + ' tracks');
+  console.log(query);
+  for(let trackID of Object.keys(library.tracks)){
+    var p;
+    var itHappened = 0;
+    var repeates;
 
-  }else{
+    for(var trackInfo of Object.keys(library.tracks[trackID])){
 
+      p = library.tracks[trackID][trackInfo].search(new RegExp(query, "i"));
+      console.log(p);
 
-    for(var out of Object.keys(library.playlists)){
+      if(p > -1){
 
-       console.log(out + ': ' + library.playlists[out].name + ' - ' +
-        Object.keys(library.playlists[out].tracks).length + ' tracks');
+        if(trackID !== repeates){
+          console.log(library.tracks[trackID]);
+          itHappened++;
+          repeates = trackID;
+        }
 
+      }
     }
+
   }
+
+  if(itHappened === 0){
+
+    console.log('Sorry that never came up in the database.');
+  }
+
 };
 
 
-// prints a list of all tracks, in the form:
-// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
-// t02: Model View Controller by James Dempsey (WWDC 2003)
-// t03: Four Thirty-Three by John Cage (Woodstock 1952)
+printSearchResults('c');
+var str = 'John Cage';
+var pop = str.search(new RegExp('cage', "i"));
 
-var printTracks = function (trackNum) {
+console.log(pop);
+
+
+
+
+
+
+printTracks: function (trackNum) {
 
   if(trackNum){
 
-    console.log(trackNum + ': ' + library.tracks[trackNum].name + ' by ' +
-      library.tracks[trackNum].artist + " (" + library.tracks[trackNum].album + ")" );
+    console.log(trackNum + ': ' + this.tracks[trackNum].name + ' by ' +
+      this.tracks[trackNum].artist + " (" + this.tracks[trackNum].album + ")" );
 
   }else{
 
-    for(var out of Object.keys(library.tracks)){
+    for(var out of Object.keys(this.tracks)){
 
-       console.log(out + ': ' + library.tracks[out].name + ' by ' +
-        library.tracks[out].artist + " (" + library.tracks[out].album + ")" );
+       console.log(out + ': ' + this.tracks[out].name + ' by ' +
+        this.tracks[out].artist + " (" + this.tracks[out].album + ")" );
      }
   }
 
-};
+},
 
 
-// prints a list of tracks for a given playlist, in the form:
-// p01: Coding Music - 2 tracks
-// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
-// t02: Model View Controller by James Dempsey (WWDC 2003)
-
-var printPlaylist = function (playlistId) {
+printPlaylist: function (playlistId) {
 
   printPlaylists(playlistId);
 
 
-  for(var song of library.playlists[playlistId].tracks){
+  for(var song of this.playlists[playlistId].tracks){
 
     printTracks(song);
 
   }
 
-};
+},
 
-var addTrackToPlaylist = function (trackId, playlistId) {
 
-  library.playlists[playlistId].tracks.push(trackId);
 
-};
+addTrackToPlaylist: function (trackId, playlistId) {
 
-var uid = function() {
+  this.playlists[playlistId].tracks.push(trackId);
+
+},
+
+
+uid: function() {
   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-};
+},
 
-var addTrack = function (name, artist, album) {
 
-  var newID = uid();
-
-  library.tracks[newID] = {id: (newID),name: (name),artist: (artist),album: (album)};
-
-};
-
-var addPlaylist = function (name) {
+addTrack: function (name, artist, album) {
 
   var newID = uid();
 
-  library.playlists[newID] = {id: (newID),name: (name), tracks: []};
+  this.tracks[newID] = {id: (newID),name: (name),artist: (artist),album: (album)};
 
+},
+
+
+addPlaylist: function (name) {
+
+  var newID = uid();
+
+  this.playlists[newID] = {id: (newID),name: (name), tracks: []};
+
+},
+
+printSearchResults: function(query) {
+
+    for(let trackID of Object.keys(this.tracks)){
+      var p;
+      var itHappened = 0;
+      var repeates;
+
+      for(var trackInfo of Object.keys(this.tracks[trackID])){
+
+        p = this.tracks[trackID][trackInfo].search(new RegExp(query, "i"));
+
+        if(p > -1){
+
+          if(trackID !== repeates){
+            console.log(this.tracks[trackID]);
+            itHappened++;
+            repeates = trackID;
+          }
+
+        }
+      }
+
+    }
+
+    if(itHappened === 0){
+
+      console.log('Sorry that never came up in the database.');
+    }
+
+  },
+
+}
 };
-
-var idd = 't04';
-var array = [1, 2, 3];
-var input = 4;
-
-// console.log(input in array);
-
-var len = Object.keys(library.tracks).length;
-
-var out = 'p01';
-var outt = 't03';
-
-// var check = function(rawr){
-
-//   if(rawr){
-
-//     console.log('yay');
-
-//   }else{
-
-//     console.log("both?");
-
-//   }
-
-// };
-
-addPlaylist('jack');
-printPlaylists();
-// console.log(Object.keys(library.playlists[obj].tracks).length);
-
-// printPlaylists();
-// printTracks();
-
-/*library.tracks[idd] = {id: idd, name: 'Musiccccc', artist: 'More Music', album: 'wind'};
-console.log(library.tracks[idd]);
-console.log(library.tracks);
-console.log(library.tracks[idd].name);
-*/
