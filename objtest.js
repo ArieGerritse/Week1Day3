@@ -1,20 +1,33 @@
-var obj = new Object();
+var salesTaxRates = {
+  AB: 0.05,
+  BC: 0.12,
+  SK: 0.10
+};
 
-var array = [1, 5, 6];
-var array2 = [];
-var something = 'l';
+var companySalesData = [
+  {
+    name: "Telus",
+    province: "BC",
+    sales: [ 100, 200, 400 ]
+  },
+  {
+    name: "Bombardier",
+    province: "AB",
+    sales: [ 80, 20, 10, 100, 90, 500 ]
+  },
+  {
+    name: "Telus",
+    province: "SK",
+    sales: [ 500, 100 ]
+  }
+];
 
-var somet = 'n';
+console.log(companySalesData[1].name);
 
-obj[something] = array;
+/*calculateSalesTax(companySalesData, salesTaxRates);
 
-array2 = obj[something];
-// obj[somet] = 1;
+function calculateSalesTax (salesData, taxRates){
 
-obj[somet] = 9;
+  console.log(salesData[name]);
 
-
-
-console.log(obj);
-
-console.log(array2);
+}*/
