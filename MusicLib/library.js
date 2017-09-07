@@ -1,6 +1,5 @@
 var library = {
-  tracks: { t01: { id: "t01",
-                   name: "Code Monkey",
+  tracks: { t01: { id: "t01", name: "Code Monkey",
                    artist: "Jonathan Coulton",
                    album: "Thing a Week Three" },
             t02: { id: "t02",
@@ -10,7 +9,7 @@ var library = {
             t03: { id: "t03",
                    name: "Four Thirty-Three",
                    artist: "John Cage",
-                   album: "Woodstock 1952"}
+                   album: "Woodstock 1952",}
           },
   playlists: { p01: { id: "p01",
                       name: "Coding Music",
@@ -35,7 +34,7 @@ var printPlaylists = function (playNum) {
   if(playNum){
 
      console.log(playNum + ': ' + library.playlists[playNum].name + ' - ' +
-      Object.keys(library.playlists[playNum].tracks).length + ' tracks');
+      library.playlists[playNum].tracks.length + ' tracks');
 
   }else{
 
@@ -43,7 +42,7 @@ var printPlaylists = function (playNum) {
     for(var out of Object.keys(library.playlists)){
 
        console.log(out + ': ' + library.playlists[out].name + ' - ' +
-        Object.keys(library.playlists[out].tracks).length + ' tracks');
+        library.playlists[out].tracks.length + ' tracks');
 
     }
   }
@@ -171,21 +170,28 @@ var printSearchResults = function(query) {
 
 
 
+// printSearchResults('cage');
 
 
 
+// for(var out of Object.keys(library.playlists)){
+//   console.log(out)
+// };
 
 
+var array = ['p01','p02'];
 
 
+for(var i = 0; i < array.length ; i++){
 
+  console.log(array[i]);
 
+}
 
+for(var i of array){
 
-
-
-
-
+  console.log(i);
+}
 
 
 

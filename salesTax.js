@@ -13,8 +13,7 @@ function calculateSalesTax (salesData, taxRates){
     if(company in output){
 
       output[company].totalSales += addSales(salesData[i].sales);
-      output[company].totalTaxes += addSales(salesData[i].sales) *
-      taxRates[salesData[i].province];
+      output[company].totalTaxes += addSales(salesData[i].sales) * taxRates[salesData[i].province];
       // console.log("gere!");
 
     } else{

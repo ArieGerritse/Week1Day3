@@ -1,37 +1,122 @@
-var salesTaxRates = {
-  AB: 0.05,
-  BC: 0.12,
-  SK: 0.10
+var data = {
+  f01: {
+    name: "Alice",
+    age: 15,
+    follows: ["f02", "f03", "f04"]
+  },
+  f02: {
+    name: "Bob",
+    age: 20,
+    follows: ["f05", "f06"]
+  },
+  f03: {
+    name: "Charlie",
+    age: 35,
+    follows: ["f01", "f04", "f06"]
+  },
+  f04: {
+    name: "Debbie",
+    age: 40,
+    follows: ["f01", "f02", "f03", "f05", "f06"]
+  },
+  f05: {
+    name: "Elizabeth",
+    age: 45,
+    follows: ["f04"]
+  },
+  f06: {
+    name: "Finn",
+    age: 25,
+    follows: ["f05"]
+  }
 };
 
-var companySalesData = [
-  {
-    name: "Telus",
-    province: "BC",
-    sales: [ 100, 200, 400 ]
-  },
-  {
-    name: "Bombardier",
-    province: "AB",
-    sales: [ 80, 20, 10, 100, 90, 500 ]
-  },
-  {
-    name: "Telus",
-    province: "SK",
-    sales: [ 500, 100 ]
-  }
-];
 
-console.log(companySalesData[1].name);
 
-/*calculateSalesTax(companySalesData, salesTaxRates);
+  var followedMost =  function(age){
 
-function calculateSalesTax (salesData, taxRates){
+    var folMost = {};
+    var current;
+    var i = 0;
+    var ties = 0, total = 0;
 
-  console.log(salesData[name]);
 
-}*/
+    for(var people of Object.keys(data)){
 
-var array = [1,2,3];
+      if(people in folMost === false){
 
-console.log(Math.sum(1,2,3));
+        if(age){
+
+          if(data[people].age > age){
+
+            folMost[people] = {name:data[people].name,FollowedByThesePeople: 0};
+
+          }
+
+        }else{
+
+          folMost[people] = {name:data[people].name,FollowedByThesePeople: 0};
+
+        }
+
+      }
+
+    }
+
+    for(var people2 of Object.keys(data)){
+
+      for(var temp of Object.keys(folMost)){
+
+        if(data[people2].follows.includes(temp)){
+
+          folMost[temp].FollowedByThesePeople++;
+
+        }
+
+      }
+    }
+
+    for(var endthis of Object.keys(folMost)){
+
+      if(folMost[endthis].FollowedByThesePeople > total){
+
+        ties=0;
+        total = folMost[endthis].FollowedByThesePeople;
+
+      }
+      if(folMost[endthis].FollowedByThesePeople === total){
+        ties++;
+      }
+    }
+
+    if(ties > 0){
+
+      console.log('There was a tie for most followed by with: ' + total + ' follows');
+
+      for(var peopleTied of Object.keys(folMost)){
+
+        if(total === folMost[peopleTied].FollowedByThesePeople){
+
+          console.log(folMost[peopleTied].name + '!');
+
+        }
+      }
+    }else{
+
+      for(var peopleTied of Object.keys(folMost)){
+
+        if(total === folMost[peopleTied].FollowedByThesePeople){
+
+          console.log(folMost[peopleTied].name + ' had the most followers with: ' + total);
+
+        }
+      }
+
+
+    }
+
+};
+
+
+  followedMost(30);
+

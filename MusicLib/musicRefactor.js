@@ -65,12 +65,12 @@ printTracks: function (trackNum) {
 
 printPlaylist: function (playlistId) {
 
-  printPlaylists(playlistId);
+  this.printPlaylists(playlistId);
 
 
   for(var song of this.playlists[playlistId].tracks){
 
-    printTracks(song);
+    this.printTracks(song);
 
   }
 
@@ -92,7 +92,7 @@ uid: function() {
 
 addTrack: function (name, artist, album) {
 
-  var newID = uid();
+  var newID = this.uid();
 
   this.tracks[newID] = {id: (newID),name: (name),artist: (artist),album: (album)};
 
@@ -101,7 +101,7 @@ addTrack: function (name, artist, album) {
 
 addPlaylist: function (name) {
 
-  var newID = uid();
+  var newID = this.uid();
 
   this.playlists[newID] = {id: (newID),name: (name), tracks: []};
 
@@ -118,15 +118,16 @@ printSearchResults: function(query) {
 
         p = this.tracks[trackID][trackInfo].search(new RegExp(query, "i"));
 
-        if(p > -1){
+      if(p > -1){
 
-          if(trackID !== repeates){
-            console.log(this.tracks[trackID]);
-            itHappened++;
-            repeates = trackID;
-          }
-
+        if(trackID !== repeates){
+          console.log(this.tracks[trackID]);
+          itHappened++;
+          repeates = trackID;
         }
+
+      }
+
       }
 
     }
